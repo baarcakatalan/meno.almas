@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>کافه الماس</title>
+  <style>
+    body {
+      font-family: "Tahoma", sans-serif;
+      margin: 0;
+      color: #004010;
+      background: none;
+      direction: rtl;
+      text-align: right;
+    }
+    header {
+      background-color: #000000d8;
+      text-align: center;
+      padding: 1em;
+    }
+    header h1 {
+      color: #ffd800;
+      text-shadow: 1px 1px 8px #222;
+    }
+    #home-page {
+      min-height: 100vh;
+      background-image: url("images/vorodi1.jpg");
+      background-size: 800px 600px;
+      background-position: center bottom;
+      background-repeat: no-repeat;
+      background-color:#6b6969 ;
+      padding-top: 2em;
+    }
+    .home-option {
+      background-color: rgba(206, 214, 192, 0.92);
+      margin: 2em auto;
+      padding: 2em;
+      width: 80%;
+      max-width: 420px;
+      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 3px 16px rgba(0,0,0,0.15);
+      cursor: pointer;
+      font-size: 1.5em;
+    }
+    .home-option:hover { background-color: #3e3d3d; }
+    
+    .category-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* تغییر از 8 به 4 ستون */
+      gap: 0.4em; /* کاهش فاصله */
+      background-color: rgba(181, 111, 5, 0.588);
+      padding: 0.8em; /* کاهش padding */
+      border-radius: 0;
+      margin-top: 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    
+    .category-tabs button {
+      background: #ff9500;
+      border: 2px solid #817e7e;
+      color: #000000;
+      padding: 0.5em 0.6em; /* کاهش padding */
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 0.75em; /* کاهش سایز فونت */
+      font-weight: bold;
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+      text-align: center;
+      line-height: 1.3;
+    }
+    
+    .category-tabs button:hover {
+      background-color: #c92626;
+      color: white;
+    }
+
+    /* ریسپانسیو برای موبایل */
+    @media (max-width: 768px) {
+      .category-tabs {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .category-tabs {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .category-tabs button {
+        font-size: 0.7em;
+        padding: 0.4em 0.5em;
+      }
+    }
+    
+    .menu-items {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5em;
+      padding: 1em;
+      min-height: calc(100vh - 200px);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      align-content: start;
+    }
+    
+    .menu-card {
+      background-color: rgba(113, 205, 207, 0.7);
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(33, 134, 157, 0.889);
+      text-align: center;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 180px;
+    }
+    
+    .menu-card h3 { 
+      color: #040544d6; 
+      margin: 1em 0.5em 0.5em;
+      font-size: 1.1em;
+      min-height: 2.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .menu-card p { 
+      font-size: 0.9em; 
+      padding: 0 1em; 
+      margin: 0.5em 0;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .menu-card .price {
+      font-weight: bold;
+      margin: 0.5em 0 1em;
+      color: #000000;
+      font-size: 1.1em;
+    }
+    
+    /* ریسپانسیو برای منو آیتم‌ها */
+    @media (max-width: 1200px) {
+      .menu-items {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .menu-items {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .menu-items {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .menu-items.coffee-bg {
+      background-image: url("images/coffeee.jpg");
+    }
+    .menu-items.tea-bg {
+      background-image: url("images/teaaa.png");
+    }
+    .menu-items.icecream-bg {
+      background-image: url("images/shaake.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+    .menu-items.sandwich-bg {
+      background-image: url("images/sandwich.jpg");
+    }
+    .menu-items.pizaa-bg {
+      background-image: url("images/pizza-placeholder.jpg");
+    }
+    .menu-items.ghelyan-bg {
+      background-image: url("images/ghelyan-placeholder.jpg");
+    }
+    .menu-items.breakfast-bg {
+      background-image: url("images/break.jpg");
+    }
+    
+    .breakfast-time {
+      text-align: center;
+      padding: 0.6em 0;
+      background-color: rgba(255,255,255,0.75);
+      font-weight: bold;
+      font-size: 1.1em;
+      margin-bottom: 0.8em;
+      border-radius: 8px;
+    }
+    
+    .back-btn {
+      display: block;
+      margin: 2em auto 1.2em;
+      padding: 0.7em 1.6em;
+      background-color: #b5d5d5;
+      color: rgb(0, 0, 0);
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(193, 194, 179, 0.949);
+      cursor: pointer;
+      font-size: 1.2em;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    .back-btn:hover { background: #031c57; }
+    
+    #menu-page {
+      display: none;
+      padding: 0;
+      overflow-x: hidden; /* تغییر از auto به hidden برای حذف اسکرول افقی */
+      background-image: url("images/vorodi2.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+    }
+    
+    #menu-page header {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 1em;
+      width: 100%;
+    }
+    
+    #menu-page header h1 {
+      color: #ffd800;
+      text-shadow: 1px 1px 8px #222;
+      margin: 0;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+<div id="home-page">
+  <header>
+    <h1>کافه الماس</h1>
+  </header>
+  <main>
+    <div class="home-option" onclick="showMenu()">
+      <h2>منوی کافه الماس</h2>
+    </div>
+    <div class="home-option" onclick="showInfo()">
+      <h2>اطلاعات کافه الماس</h2>
+    </div>
+  </main>
+</div>
+
+<div id="menu-page">
+  <header>
+    <h1>زمانی هرچند کوتاه برای رسیدن به حال خوب</h1>
+  </header>
+  <nav class="category-tabs">
+    <button data-category="breakfast">صبحانه</button>
+    <button data-category="pizza">پیتزا و پاستا</button>
+    <button data-category="sandwich">ساندویچ و برگر</button>
+    <button data-category="food">غذای روز</button>
+    <button data-category="iranianfood">غذای ایرانی</button>
+    <button data-category="salad">سالاد</button>
+    <button data-category="khas">یه چیز خاص</button>
+    <button data-category="potato">سیب زمینی و چیپس</button>
+    <button data-category="snak">اسنک</button>
+    <button data-category="motefareghe">متفرقه</button>
+    <button data-category="coffee">بر پایه قهوه</button>
+    <button data-category="tea">چای و دمنوش</button>
+    <button data-category="cake">کروسان و کیک</button>
+    <button data-category="icecream">شیک و بستنی</button>
+    <button data-category="juice">نوشیدنی خنک</button>
+    <button data-category="ghelyan">قلیان و سرویس</button>
+  </nav>
+  <section id="menu-items" class="menu-items"></section>
+  <button class="back-btn" onclick="showHome()">بازگشت</button>
+</div>
+
+<div id="info-page" style="display:none;">
+  <header>
+    <h1>اطلاعات کافه الماس</h1>
+  </header>
+  <main>
+    <p>آدرس: تهران، میدان جمهوری نرسیده به ارومیه، پلاک ۱۲۳</p>
+    <p>شماره تماس: 09127932395</p>
+    <p>ساعت کاری: 9:00 صبح تا 11:30 شب</p>
+  </main>
+  <button class="back-btn" onclick="showHome()">بازگشت</button>
+</div>
+
+<script>
+  const menuData = {
+    coffee: [
+      {name: "مخصوص", price: "165,000"},
+      {name: "اسپرسو", price: "95,000"},
+      {name: "امریکانو", price: "115,000"},
+      {name: "آیس امریکانو", price: "125,000"},
+      {name: "لته", price: "135,000"},
+      {name: "آیس لته", price: "145,000"},
+      {name: "موکا", price: "135,000"},
+      {name: "آیس موکا", price: "145,000"},
+      {name: "ماکیاتو", price: "135,000"},
+      {name: "آیس ماکیاتو", price: "145,000"},
+      {name: "کاپوچینو", price: "135,000"},
+      {name: "نسکافه بلک", price: "115,000"},
+      {name: "هات چاکلت", price: "135,000"},
+      {name: "وایت چاکلت", price: "125,000"},
+      {name: "شیر قهوه", price: "145,000"},
+      {name: "شیر نسکافه", price: "135,000"},
+      {name: "شیر نوتلا", price: "155,000"},
+      {name: "شیر عسل", price: "125,000"},
+    ],
+    tea: [
+      {name: "چای سبز", price: "105,000"},
+      {name: "چای دمی", price: "75,000"},
+      {name: "چای کرک زعفران", price: "125,000"},
+      {name: "چای زعفران", price: "125,000"},
+      {name: "چای ماسالا", price: "125,000"},
+      {name: "چای دارچین", price: "115,000"},
+      {name: "چای زنجبیل", price: "115,000"},
+      {name: "چای ترش", price: "105,000"},
+      {name: "دمنوش آرامش", price: "135,000"},
+      {name: "دمنوش میکس", price: "145,000"},
+      {name: "دمنوش سلامت", price: "125,000"},
+      {name: "دمنوش گل گاوزبان", price: "155,000"},
+      {name: "دمنوش آویشن", price: "115,000"},
+    ],
+    icecream: [
+      {name: " شیک شکلات",  price: "175,000"},
+      {name: " شیک وانیل",  price: "135,000"},
+      {name: "شیک نوتلا ",  price: "195,000"},
+      {name: " شیک موز شکلات",  price: "195,000"},
+      {name: " شیک موز نوتلا",  price: "215,000"},
+      {name: " شیک قهوه",  price: "185,000"},
+      {name: " شیک نسکافه",  price: "185,000"},
+      {name: " شیک اسنیکرز",  price: "185,000"},
+      {name: " شیک توت فرنگی",  price: "165,000"},
+      {name: " شیک انبه",  price: "185,000"},
+      {name: " کافه گلاسه",  price: "195,000"},
+      {name: " شکلات گلاسه",  price: "175,000"},
+      {name: " سان شاین",  price: "195,000"},
+      {name: " ژلاتو",  price: "145,000"},
+      {name: "کیک بستنی", price: "145,000"},
+      {name: "کپ بستنی", price: "125,000"},
+      {name: " اسموتی انرژی زا", desc:"شیر،موز،خرما،کنجد،بستنی", price: "235,000"},
+    ],
+    sandwich: [
+      {name: "برگر مخصوص الماس",  price: "385,000"},
+      {name: "برگر ساده", price: "225,000"},
+      {name: "چیز برگر", price: "275,000"},
+      {name: "رویال برگر", price: "315,000"},
+      {name: "هات داگ", price: "185,000"},
+      {name: "هات داگ با قارچ و پنیر", price: "235,000"},
+      {name: "هات داگ رویال", price: "285,000"},
+      {name: "ژامبون سرد", price: "195,000"},
+      {name: "ژامبون تنوری", price: "275,000"},
+      {name: "فیله", price: "235,000"},
+      {name: "رست بیف", price: "315,000"},
+      {name: "رست بیف با قارچ و پنیر", price: "375,000"},
+      {name: "فلافل", desc: "هم به صورت ساندویچ هم به صورت پرسی", price: "125,000"},
+      {name: "فلافل با قارچ و پنیر", price: "175,000"},
+    ],
+    food:  [
+      {name: "لوبیا پلو   ", desc: "  شنبه ", price: "155,000"},
+      {name: "عدس پلو ",desc: "  یک شنبه ",  price: "155,000"},
+      {name: "ماکارونی ",desc: "  دو شنبه", price: "155,000"},
+      {name: "هویج پلو ",desc: "   سه شنبه ", price: "155,000"},
+      {name: "استامبولی  ",desc: "   چهارشنبه ", price: "155,000"},
+      {name: "   کباب تابه ای با برنج ", price: "195,000"},
+      {name: "سالاد شیرازی   ", price: "35,000"},
+      {name: "    ماست و خیار ",desc:"پنج شنبه"   ,price: "35,000"},
+    ],
+    juice: [
+      {name: "  لیموناد",  price: "125,000"},
+      {name: "موهیتو ", price: "135,000"},
+      {name: "رد موهیتو ", price: "155,000"},
+      {name: "بلو موهیتو ", price: "155,000"},
+      {name: "آبجو کلاسیک ", price: "185,000"},
+      {name: "کوکتل الماس ",desc:"لیمو،توت فرنگی،نعناع" , price: "175,000"},
+      {name: "آب زرشک ", price: "115,000"},
+      {name: "آب آلبالو ", price: "115,000"},
+      {name: "آب میوه فصل", price: "130,000"},
+      {name: "ترش مخصوص الماس ", price: "175,000"},
+    ],
+    salad: [
+      {name: " سزار با فیله سوخاری", price: "335,000"},
+      {name: " سزار با فیله گریل", price: "315,000"},    
+    ],
+    khas: [
+      {name: "سینی مزه با فیله", price: "385,000"},
+      {name: "سینی کتف و بال", price: "315,000"},
+
+    ],
+    iranianfood: [
+      {name: "کشک بادمجان", price: "240,000"},
+      {name: "میرزاقاسمی", price: "255,000"},
+      {name: "کباب تابه ای", price: "295,000"},
+    ],
+    motefareghe: [
+      {name: "نان سیر", price: "235,000"},
+      {name: "ذرت مکزیکی", price: "175,000"},
+    ],
+    snak: [
+      {name: "ژامبون", price: "145,000"},
+      {name: "فیله", price: "165,000"},
+      {name: "رست بیف", price: "185,000"},
+    ],
+    cake: [
+      {name: "کروسان نوتلا کوچک", price: "65,000"},
+      {name: "کروسان نوتلا بزرگ", price: "125,000"},
+      {name: "کیک روز", price: "95,000"},
+    ],
+    potato: [
+      {name: "ساده ", price: "185,000"},
+      {name: " مخصوص", price: "315,000"},
+      {name: " همراه با پنیر", price: "225,000"},
+      {name: "همراه با قارچ و پنیر", price: "265,000"},
+      {name: "همراه با سس بشامل", price: "285,000"},
+      {name: "همراه با هات داگ", price: "295,000"},
+      {name: "چیپس مخصوص", price: "285,000"},
+      {name: "چیپس و پنیر ویژه", price: "215,000"},
+    ],
+    pizza: [
+      {name: "رست بیف",desc:"تک نفره و دو نفره" ,price: "375,000/535,000"},
+      {name: "دیپ چیکن",desc:"تک نفره و دو نفره", price: "335,000/475,000"},
+      {name: "پپرونی",desc:"تک نفره و دو نفره", price: "315,000/455,000"},
+      {name: "مخصوص",desc:"تک نفره و دو نفره", price: "355,000/495,000"},
+      {name: " پاستا آلفردو ", price: "325,000"},
+      {name: "لازانیا مخصوص الماس", price: "345,000"},
+      {name: "پاستا بیف", price: "385,000"},
+    ],
+    ghelyan: [
+      {name: "دوسیب", price: "275,000"},
+      {name: "دوسیب آلبالو", price: "275,000"},
+      {name: "دوسیب شلیل", price: "275,000"},
+      {name: "دوسیب نعنا", price: "275,000"},
+      {name: "سیب یخ", price: "275,000"},
+      {name: "آلبالو", price: "275,000"},
+      {name: "آلو یخ", price: "275,000"},
+      {name: "پرتقال", price: "275,000"},
+      {name: "پرتقال نعناع", price: "275,000"},
+      {name: "پرتقال خامه", price: "275,000"},
+      {name: "لیمو نعناع", price: "275,000"},
+      {name: "لیمو", price: "275,000"},
+      {name: "نعناع", price: "275,000"},
+      {name: "هلو", price: "275,000"},
+      {name: "هلو نعناع", price: "275,000"},
+      {name: "هلو آلبالو", price: "275,000"},
+      {name: "هندوانه یخ", price: "275,000"},
+      {name: "آدامس دارچین", price: "275,000"},
+      {name: "بلوبری", price: "275,000"},
+      {name: "انبه", price: "275,000"},
+      {name: "لاو", price: "275,000"},
+      {name: "آدامس نعناع", price: "275,000"},
+      {name: "شبهای مسکو", price: "275,000"},
+      {name: "لیدی", desc: "ویژه", price: "345,000"},
+      {name: "جادوگر", desc: "ویژه", price: "345,000"},
+      {name: "بیسکویت", desc: "ویژه", price: "345,000"},
+      {name: "هاوایی", desc: "ویژه", price: "345,000"},
+      {name: "بلوگوآوا", desc: "ویژه", price: "345,000"},
+      {name: "شیر قهوه", desc: "ویژه", price: "345,000"},
+      {name: " سرویس اضافه",  price: "75,000"},
+      {name: "تعویض سری معمولی", price: "120,000"},
+      {name: "تعویض سری ویژه", price: "195,000"},
+    ],
+    breakfast: [
+      {name: "صبحانه ایرانی", price: "255,000"},
+      {name: "صبحانه انگلیسی", price: "285,000"},
+      {name: "املت", price: "125,000"},
+      {name: "  املت با گوجه", price: "125,000"},
+      {name: "املت و قارچ", price: "155,000"},
+      {name: "سوسیس تخم‌مرغ", price: "175,000"},
+      {name: "نیمرو", price: "195,000"},
+      {name: "نیمرو خرما", price: "155,000"},
+      {name: "عدسی", price: "135,000"},
+      {name: "خوراک لوبیا", price: "145,000"},
+    ]
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll(".category-tabs button");
+    const menuContainer = document.getElementById("menu-items");
+
+    function renderItems(category) {
+      menuContainer.innerHTML = "";
+      menuData[category].forEach(item => {
+        const card = document.createElement("div");
+        card.className = "menu-card";
+        let descHTML = "";
+        if (item.desc) {
+          descHTML = `<p>${item.desc}</p>`;
+        }
+        card.innerHTML = `
+          <h3>${item.name}</h3>
+          ${descHTML}
+          <div class="price">${item.price} تومان</div>
+        `;
+        menuContainer.appendChild(card);
+      });
+      menuContainer.className = "menu-items"; // پایه
+      switch (category) {
+        case "coffee":
+          menuContainer.classList.add("coffee-bg");
+          break;
+        case "tea":
+          menuContainer.classList.add("tea-bg");
+          break;
+        case "icecream":
+          menuContainer.classList.add("icecream-bg");
+          break;
+        case "sandwich":
+          menuContainer.classList.add("sandwich-bg");
+          break;
+        case "pizza":
+          menuContainer.classList.add("pizaa-bg");
+          break;
+        case "ghelyan":
+          menuContainer.classList.add("ghelyan-bg");
+          break;
+        case "breakfast":
+          menuContainer.classList.add("breakfast-bg");
+          break;
+        case "juice":
+        case "salad":
+        case "khas":
+        case "iranianfood":
+        case "motefareghe":
+        case "snak":
+        case "cake":
+        case "potato":
+        case "food":
+          // برای دسته‌بندی‌هایی که عکس خاصی ندارند، از عکس پیش‌فرض استفاده می‌کنیم
+          menuContainer.classList.add("coffee-bg");
+          break;
+      }
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        renderItems(btn.dataset.category);
+      });
+    });
+  });
+
+  function showMenu() {
+    document.getElementById('home-page').style.display = 'none';
+    document.getElementById('menu-page').style.display = 'block';
+    document.getElementById('info-page').style.display = 'none';
+  }
+  function showInfo() {
+    document.getElementById('home-page').style.display = 'none';
+    document.getElementById('menu-page').style.display = 'none';
+    document.getElementById('info-page').style.display = 'block';
+  }
+  function showHome() {
+    document.getElementById('home-page').style.display = 'block';
+    document.getElementById('menu-page').style.display = 'none';
+    document.getElementById('info-page').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
