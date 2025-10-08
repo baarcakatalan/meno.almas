@@ -31,11 +31,11 @@
             text-align: center;
             background: 
                 linear-gradient(135deg, 
-                    rgba(245, 228, 200, 0.4) 0%, 
-                    rgba(223, 205, 174, 0.3) 100%),
-                url('images/cafe-bg.jpg?v=3');
+                    rgba(245, 228, 200, 0.6) 0%, 
+                    rgba(223, 205, 174, 0.5) 100%),
+                url('images/cafe-bg.jpg?v=4');
             background-size: cover;
-            background-position: center;
+            background-position: center center;
             background-blend-mode: soft-light;
             background-attachment: fixed; /* این خط جدید */
             background-repeat: no-repeat;
@@ -697,6 +697,14 @@
                 width: 95%;
             }
         }
+        /* برای موبایل */
+        @media (max-width: 768px) {
+            #home-page {
+                background-attachment: scroll;
+                background-position: center center;
+                background-size: cover;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1091,8 +1099,11 @@
         function showMenu() {
             document.getElementById('home-page').style.display = 'none';
             document.getElementById('menu-page').style.display = 'block';
+            // تأخیر کوچیک برای رندر
+            setTimeout(() => {
             renderCategories();
-            document.getElementById('itemsGrid').innerHTML = '<div class="welcome-message" style="text-align: center; padding: 50px; opacity: 0.7;">لطفاً یک دسته‌بندی را انتخاب کنید</div>';
+            document.getElementById('itemsGrid').innerHTML = '<div class="welcome-message" style="text-align: center; padding: 50px; color: white; font-size: 1.2rem; font-weight: 500;">لطفاً یک دسته‌بندی را انتخاب کنید</div>';
+            }, 10);
         }
 
         function showHome() {
@@ -1224,6 +1235,7 @@
 </body>
  <!-- test -->
 </html>
+
 
 
 
