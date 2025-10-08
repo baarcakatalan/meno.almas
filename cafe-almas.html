@@ -1,566 +1,1221 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-  <meta charset="UTF-8">
-  <title>کافه الماس</title>
-  <style>
-    body {
-      font-family: "Tahoma", sans-serif;
-      margin: 0;
-      color: #004010;
-      background: none;
-      direction: rtl;
-      text-align: right;
-    }
-    header {
-      background-color: #000000d8;
-      text-align: center;
-      padding: 1em;
-    }
-    header h1 {
-      color: #ffd800;
-      text-shadow: 1px 1px 8px #222;
-    }
-    #home-page {
-      min-height: 100vh;
-      background-image: url("images/vorodi1.jpg");
-      background-size: 800px 600px;
-      background-position: center bottom;
-      background-repeat: no-repeat;
-      background-color:#6b6969 ;
-      padding-top: 2em;
-    }
-    .home-option {
-      background-color: rgba(206, 214, 192, 0.92);
-      margin: 2em auto;
-      padding: 2em;
-      width: 80%;
-      max-width: 420px;
-      text-align: center;
-      border-radius: 12px;
-      box-shadow: 0 3px 16px rgba(0,0,0,0.15);
-      cursor: pointer;
-      font-size: 1.5em;
-    }
-    .home-option:hover { background-color: #3e3d3d; }
-    
-    .category-tabs {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr); /* تغییر از 8 به 4 ستون */
-      gap: 0.4em; /* کاهش فاصله */
-      background-color: rgba(181, 111, 5, 0.588);
-      padding: 0.8em; /* کاهش padding */
-      border-radius: 0;
-      margin-top: 0;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    
-    .category-tabs button {
-      background: #ff9500;
-      border: 2px solid #817e7e;
-      color: #000000;
-      padding: 0.5em 0.6em; /* کاهش padding */
-      cursor: pointer;
-      border-radius: 5px;
-      font-size: 0.75em; /* کاهش سایز فونت */
-      font-weight: bold;
-      transition: background 0.2s, color 0.2s;
-      white-space: nowrap;
-      text-align: center;
-      line-height: 1.3;
-    }
-    
-    .category-tabs button:hover {
-      background-color: #c92626;
-      color: white;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کافه الماس | Diamond Cafe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* ریسپانسیو برای موبایل */
-    @media (max-width: 768px) {
-      .category-tabs {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .category-tabs {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .category-tabs button {
-        font-size: 0.7em;
-        padding: 0.4em 0.5em;
-      }
-    }
-    
-    .menu-items {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5em;
-      padding: 1em;
-      min-height: calc(100vh - 200px);
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      align-content: start;
-    }
-    
-    .menu-card {
-      background-color: rgba(113, 205, 207, 0.7);
-      border-radius: 8px;
-      box-shadow: 0 2px 12px rgba(33, 134, 157, 0.889);
-      text-align: center;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 180px;
-    }
-    
-    .menu-card h3 { 
-      color: #040544d6; 
-      margin: 1em 0.5em 0.5em;
-      font-size: 1.1em;
-      min-height: 2.5em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .menu-card p { 
-      font-size: 0.9em; 
-      padding: 0 1em; 
-      margin: 0.5em 0;
-      flex-grow: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .menu-card .price {
-      font-weight: bold;
-      margin: 0.5em 0 1em;
-      color: #000000;
-      font-size: 1.1em;
-    }
-    
-    /* ریسپانسیو برای منو آیتم‌ها */
-    @media (max-width: 1200px) {
-      .menu-items {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-    
-    @media (max-width: 768px) {
-      .menu-items {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .menu-items {
-        grid-template-columns: 1fr;
-      }
-    }
-    
-    .menu-items.coffee-bg {
-      background-image: url("images/coffeee.jpg");
-    }
-    .menu-items.tea-bg {
-      background-image: url("images/teaaa.png");
-    }
-    .menu-items.icecream-bg {
-      background-image: url("images/shaake.jpg");
-      background-size: cover;
-      background-position: center;
-    }
-    .menu-items.sandwich-bg {
-      background-image: url("images/sandwich.jpg");
-    }
-    .menu-items.pizaa-bg {
-      background-image: url("images/pizza-placeholder.jpg");
-    }
-    .menu-items.ghelyan-bg {
-      background-image: url("images/ghelyan-placeholder.jpg");
-    }
-    .menu-items.breakfast-bg {
-      background-image: url("images/break.jpg");
-    }
-    
-    .breakfast-time {
-      text-align: center;
-      padding: 0.6em 0;
-      background-color: rgba(255,255,255,0.75);
-      font-weight: bold;
-      font-size: 1.1em;
-      margin-bottom: 0.8em;
-      border-radius: 8px;
-    }
-    
-    .back-btn {
-      display: block;
-      margin: 2em auto 1.2em;
-      padding: 0.7em 1.6em;
-      background-color: #b5d5d5;
-      color: rgb(0, 0, 0);
-      border: none;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(193, 194, 179, 0.949);
-      cursor: pointer;
-      font-size: 1.2em;
-      font-weight: bold;
-      transition: background 0.2s;
-    }
-    .back-btn:hover { background: #031c57; }
-    
-    #menu-page {
-      display: none;
-      padding: 0;
-      overflow-x: hidden; /* تغییر از auto به hidden برای حذف اسکرول افقی */
-      background-image: url("images/vorodi2.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      min-height: 100vh;
-    }
-    
-    #menu-page header {
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 1em;
-      width: 100%;
-    }
-    
-    #menu-page header h1 {
-      color: #ffd800;
-      text-shadow: 1px 1px 8px #222;
-      margin: 0;
-      white-space: nowrap;
-    }
-  </style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            direction: rtl;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* صفحه اصلی */
+        #home-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            background: 
+                linear-gradient(135deg, 
+                    rgba(245, 228, 200, 0.4) 0%, 
+                    rgba(223, 205, 174, 0.3) 100%),
+                url('images/safe1.webp');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: soft-light;
+        }
+
+        .logo-simple {
+            font-size: 5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 50%, #c0c0c0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: 
+                drop-shadow(0 0 15px rgba(255, 255, 255, 0.6))
+                drop-shadow(0 0 30px rgba(255, 215, 0, 0.3));
+            animation: diamondGlow 4s ease-in-out infinite;
+            transform: translateY(20px);
+        }
+
+        @keyframes diamondGlow {
+            0%, 100% { 
+                transform: translateY(20px) scale(1) rotate(0deg);
+                filter: 
+                    drop-shadow(0 0 15px rgba(255, 255, 255, 0.6))
+                    drop-shadow(0 0 30px rgba(255, 215, 0, 0.3));
+            }
+            50% { 
+                transform: translateY(20px) scale(1.05) rotate(5deg);
+                filter: 
+                    drop-shadow(0 0 20px rgba(255, 255, 255, 0.8))
+                    drop-shadow(0 0 40px rgba(255, 215, 0, 0.5));
+            }
+        }
+
+        .cafe-title {
+            font-size: 2.8rem;
+            font-weight: 300;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 
+                0 2px 4px rgba(0, 0, 0, 0.1),
+                0 4px 8px rgba(0, 0, 0, 0.05);
+            letter-spacing: 2px;
+        }
+
+        .cafe-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 50px;
+            max-width: 320px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            font-weight: 300;
+        }
+
+        .enter-btn {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.25) 0%, 
+                rgba(255, 255, 255, 0.15) 100%);
+            color: white;
+            border: none;
+            padding: 16px 45px;
+            font-size: 1.1rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(20px);
+            font-weight: 400;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent);
+            transition: left 0.6s;
+        }
+
+        .enter-btn:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.35) 0%, 
+                rgba(255, 255, 255, 0.25) 100%);
+            box-shadow: 
+                0 10px 25px rgba(255, 255, 255, 0.15),
+                0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .enter-btn:hover::before {
+            left: 100%;
+        }
+
+        .home-items {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .home-item-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(25px);
+            border-radius: 20px;
+            padding: 20px;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: right;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-item-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.4), 
+                transparent);
+        }
+
+        .home-item-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                0 15px 35px rgba(255, 255, 255, 0.1),
+                0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .info-item {
+            background: rgba(74, 144, 226, 0.15);
+            border: 1px solid rgba(74, 144, 226, 0.3);
+        }
+
+        .info-item:hover {
+            background: rgba(74, 144, 226, 0.25);
+        }
+
+        .feedback-item {
+            background: rgba(156, 39, 176, 0.15);
+            border: 1px solid rgba(156, 39, 176, 0.3);
+        }
+
+        .feedback-item:hover {
+            background: rgba(156, 39, 176, 0.25);
+        }
+
+        .home-item-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .home-item-icon {
+            font-size: 1.6rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .home-item-card:hover .home-item-icon {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .home-item-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            flex: 1;
+            text-align: right;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* صفحه منو */
+        #menu-page {
+            display: none;
+            min-height: 100vh;
+            background: 
+                linear-gradient(135deg, 
+                    rgba(230, 195, 0, 0.3) 0%, 
+                    rgba(184, 155, 79, 0.2) 100%),
+                url('images/safe2.png');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: soft-light;
+            overflow: hidden;
+        }
+
+        .menu-header {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(25px);
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .search-container {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 50px 14px 20px;
+            border: none;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.12);
+            color: white;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+            text-align: right;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .menu-layout {
+            display: flex;
+            height: calc(100vh - 80px);
+            overflow: hidden;
+        }
+
+        .categories-sidebar {
+            width: 120px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 20px 10px;
+            overflow-y: auto;
+            height: 100%;
+        }
+
+        .category-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 5px;
+            margin-bottom: 10px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .category-item.active {
+            background: linear-gradient(135deg, 
+                rgba(255, 107, 107, 0.3) 0%, 
+                rgba(255, 142, 142, 0.2) 100%);
+            border: 1px solid rgba(255, 107, 107, 0.4);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.2);
+        }
+
+        .category-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .category-item.active .category-icon {
+            opacity: 1;
+        }
+
+        .category-name {
+            font-size: 0.75rem;
+            line-height: 1.3;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .items-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            height: 100%;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .menu-item-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+            overflow: hidden;
+            text-align: right;
+        }
+
+        .menu-item-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .item-image-placeholder {
+            width: 100%;
+            height: 160px;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.15) 0%, 
+                rgba(255, 255, 255, 0.08) 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .item-image-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.15), 
+                transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        .item-icon {
+            font-size: 4rem;
+            opacity: 0.9;
+        }
+
+        .item-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.95);
+            text-align: right;
+        }
+
+        .item-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            text-align: right;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .item-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #B8860B;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+            text-align: right;
+        }
+
+        .back-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* مدال‌ها */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(42, 42, 62, 0.95);
+            backdrop-filter: blur(30px);
+            border-radius: 25px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translate(-50%, -40%); opacity: 0; }
+            to { transform: translate(-50%, -50%); opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.95);
+            background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .close-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-line {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-line:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateX(-5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            flex: 1;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: white;
+        }
+
+        .feedback-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .feedback-option {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feedback-option:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(-8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .feedback-icon {
+            font-size: 1.4rem;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .feedback-option:hover .feedback-icon {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.1);
+        }
+
+        .feedback-text {
+            flex: 1;
+            text-align: right;
+        }
+
+        .feedback-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-desc {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 480px) {
+            .logo-simple {
+                font-size: 4rem;
+                transform: translateY(15px);
+            }
+            
+            .cafe-title {
+                font-size: 2.2rem;
+            }
+            
+            .cafe-subtitle {
+                font-size: 1rem;
+                margin-bottom: 40px;
+            }
+            
+            .home-item-card {
+                padding: 15px;
+            }
+            
+            .home-item-title {
+                font-size: 1.1rem;
+            }
+            
+            .enter-btn {
+                padding: 14px 35px;
+                font-size: 1rem;
+                margin-bottom: 35px;
+            }
+            
+            .categories-sidebar {
+                width: 100px;
+            }
+            
+            .category-icon {
+                font-size: 1.7rem;
+            }
+            
+            .item-icon {
+                font-size: 3.5rem;
+            }
+            
+            .modal-content {
+                padding: 25px;
+                width: 95%;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- صفحه اصلی -->
+    <div id="home-page">
+        <div class="logo-simple">💎</div>
+        <h1 class="cafe-title">کافه الماس</h1>
+        <p class="cafe-subtitle">زمانی هرچند کوتاه برای رسیدن به حال خوب</p>
+        
+        <button class="enter-btn" onclick="showMenu()">ورود به منو</button>
 
-<div id="home-page">
-  <header>
-    <h1>کافه الماس</h1>
-  </header>
-  <main>
-    <div class="home-option" onclick="showMenu()">
-      <h2>منوی کافه الماس</h2>
+        <div class="home-items">
+            <div class="home-item-card info-item" onclick="openModal('infoModal')">
+                <div class="home-item-header">
+                    <div class="home-item-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="home-item-title">اطلاعات کافه الماس</div>
+                </div>
+            </div>
+
+            <div class="home-item-card feedback-item" onclick="openModal('feedbackModal')">
+                <div class="home-item-header">
+                    <div class="home-item-icon">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <div class="home-item-title">پیشنهاد به ما،انتقاد از ما</div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="home-option" onclick="showInfo()">
-      <h2>اطلاعات کافه الماس</h2>
+
+    <!-- مدال اطلاعات کافه -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">اطلاعات کافه الماس</h2>
+                <button class="close-btn" onclick="closeModal('infoModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="contact-info">
+                <div class="contact-line">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>بزرگراه نواب صفوی میدان جمهوری نرسیده به ارومیه پلاک 615</span>
+                </div>
+                <div class="contact-line">
+                    <a href="tel:09127932395" class="contact-link">
+                        <i class="fas fa-phone"></i>
+                        <span>09127932395</span>
+                    </a>
+                </div>
+                <div class="contact-line">
+                    <a href="https://www.instagram.com/cafe.almasss?igsh=d2Fsc2t4ajRubmtz" target="_blank" class="contact-link">
+                        <i class="fab fa-instagram"></i>
+                        <span>cafe.almasss</span>
+                    </a>
+                </div>
+                <div class="contact-line">
+                    <a href="https://maps.app.goo.gl/Wbq5UyzhEwnydqvD8" target="_blank" class="contact-link">
+                        <i class="fas fa-location-arrow"></i>
+                        <span>مشاهده روی نقشه</span>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-  </main>
-</div>
 
-<div id="menu-page">
-  <header>
-    <h1>زمانی هرچند کوتاه برای رسیدن به حال خوب</h1>
-  </header>
-  <nav class="category-tabs">
-    <button data-category="breakfast">صبحانه</button>
-    <button data-category="pizza">پیتزا و پاستا</button>
-    <button data-category="sandwich">ساندویچ و برگر</button>
-    <button data-category="food">غذای روز</button>
-    <button data-category="iranianfood">غذای ایرانی</button>
-    <button data-category="salad">سالاد</button>
-    <button data-category="khas">یه چیز خاص</button>
-    <button data-category="potato">سیب زمینی و چیپس</button>
-    <button data-category="snak">اسنک</button>
-    <button data-category="motefareghe">متفرقه</button>
-    <button data-category="coffee">بر پایه قهوه</button>
-    <button data-category="tea">چای و دمنوش</button>
-    <button data-category="cake">کروسان و کیک</button>
-    <button data-category="icecream">شیک و بستنی</button>
-    <button data-category="juice">نوشیدنی خنک</button>
-    <button data-category="ghelyan">قلیان و سرویس</button>
-  </nav>
-  <section id="menu-items" class="menu-items"></section>
-  <button class="back-btn" onclick="showHome()">بازگشت</button>
-</div>
+    <!-- مدال پیشنهاد و انتقاد -->
+    <div id="feedbackModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">پیشنهاد به ما،انتقاد از ما</h2>
+                <button class="close-btn" onclick="closeModal('feedbackModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="feedback-options">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd35e5zQdy1Lz6V3QTmT06P8jgR5Mp5epRBlr4cNlkqnflPfA/viewform?usp=dialog" target="_blank" class="feedback-option">
+                    <div class="feedback-icon">
+                        <i class="fab fa-google"></i>
+                    </div>
+                    <div class="feedback-text">
+                        <div class="feedback-title">فرم ناشناس</div>
+                        <div class="feedback-desc">ارسال پیشنهاد و انتقاد به صورت کاملاً ناشناس</div>
+                    </div>
+                </a>
+                
+                <a href="https://wa.me/989127932395?text=سلام%20👋%0Aپیشنهاد%20یا%20انتقادی%20دارم%20از%20کافه%20الماس" target="_blank" class="feedback-option">
+                    <div class="feedback-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="feedback-text">
+                        <div class="feedback-title">واتس‌اپ</div>
+                        <div class="feedback-desc">ارسال پیام مستقیم به مدیریت کافه</div>
+                    </div>
+                </a>
+                
+                <a href="https://www.instagram.com/cafe.almasss?igsh=d2Fsc2t4ajRubmtz" target="_blank" class="feedback-option">
+                    <div class="feedback-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <div class="feedback-text">
+                        <div class="feedback-title">اینستاگرام</div>
+                        <div class="feedback-desc">ارسال دایرکت به پیج کافه</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
 
-<div id="info-page" style="display:none;">
-  <header>
-    <h1>اطلاعات کافه الماس</h1>
-  </header>
-  <main>
-    <p>آدرس: تهران، میدان جمهوری نرسیده به ارومیه، پلاک ۱۲۳</p>
-    <p>شماره تماس: 09127932395</p>
-    <p>ساعت کاری: 9:00 صبح تا 11:30 شب</p>
-  </main>
-  <button class="back-btn" onclick="showHome()">بازگشت</button>
-</div>
+    <!-- صفحه منو -->
+    <div id="menu-page">
+        <div class="menu-header">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="جستجو در منو..." id="searchInput">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </div>
 
-<script>
-  const menuData = {
-    coffee: [
-      {name: "مخصوص", price: "165,000"},
-      {name: "اسپرسو", price: "95,000"},
-      {name: "امریکانو", price: "115,000"},
-      {name: "آیس امریکانو", price: "125,000"},
-      {name: "لته", price: "135,000"},
-      {name: "آیس لته", price: "145,000"},
-      {name: "موکا", price: "135,000"},
-      {name: "آیس موکا", price: "145,000"},
-      {name: "ماکیاتو", price: "135,000"},
-      {name: "آیس ماکیاتو", price: "145,000"},
-      {name: "کاپوچینو", price: "135,000"},
-      {name: "نسکافه بلک", price: "115,000"},
-      {name: "هات چاکلت", price: "135,000"},
-      {name: "وایت چاکلت", price: "125,000"},
-      {name: "شیر قهوه", price: "145,000"},
-      {name: "شیر نسکافه", price: "135,000"},
-      {name: "شیر نوتلا", price: "155,000"},
-      {name: "شیر عسل", price: "125,000"},
-    ],
-    tea: [
-      {name: "چای سبز", price: "105,000"},
-      {name: "چای دمی", price: "75,000"},
-      {name: "چای کرک زعفران", price: "125,000"},
-      {name: "چای زعفران", price: "125,000"},
-      {name: "چای ماسالا", price: "125,000"},
-      {name: "چای دارچین", price: "115,000"},
-      {name: "چای زنجبیل", price: "115,000"},
-      {name: "چای ترش", price: "105,000"},
-      {name: "دمنوش آرامش", price: "135,000"},
-      {name: "دمنوش میکس", price: "145,000"},
-      {name: "دمنوش سلامت", price: "125,000"},
-      {name: "دمنوش گل گاوزبان", price: "155,000"},
-      {name: "دمنوش آویشن", price: "115,000"},
-    ],
-    icecream: [
-      {name: " شیک شکلات",  price: "175,000"},
-      {name: " شیک وانیل",  price: "135,000"},
-      {name: "شیک نوتلا ",  price: "195,000"},
-      {name: " شیک موز شکلات",  price: "195,000"},
-      {name: " شیک موز نوتلا",  price: "215,000"},
-      {name: " شیک قهوه",  price: "185,000"},
-      {name: " شیک نسکافه",  price: "185,000"},
-      {name: " شیک اسنیکرز",  price: "185,000"},
-      {name: " شیک توت فرنگی",  price: "165,000"},
-      {name: " شیک انبه",  price: "185,000"},
-      {name: " کافه گلاسه",  price: "195,000"},
-      {name: " شکلات گلاسه",  price: "175,000"},
-      {name: " سان شاین",  price: "195,000"},
-      {name: " ژلاتو",  price: "145,000"},
-      {name: "کیک بستنی", price: "145,000"},
-      {name: "کپ بستنی", price: "125,000"},
-      {name: " اسموتی انرژی زا", desc:"شیر،موز،خرما،کنجد،بستنی", price: "235,000"},
-    ],
-    sandwich: [
-      {name: "برگر مخصوص الماس",  price: "385,000"},
-      {name: "برگر ساده", price: "225,000"},
-      {name: "چیز برگر", price: "275,000"},
-      {name: "رویال برگر", price: "315,000"},
-      {name: "هات داگ", price: "185,000"},
-      {name: "هات داگ با قارچ و پنیر", price: "235,000"},
-      {name: "هات داگ رویال", price: "285,000"},
-      {name: "ژامبون سرد", price: "195,000"},
-      {name: "ژامبون تنوری", price: "275,000"},
-      {name: "فیله", price: "235,000"},
-      {name: "رست بیف", price: "315,000"},
-      {name: "رست بیف با قارچ و پنیر", price: "375,000"},
-      {name: "فلافل", desc: "هم به صورت ساندویچ هم به صورت پرسی", price: "125,000"},
-      {name: "فلافل با قارچ و پنیر", price: "175,000"},
-    ],
-    food:  [
-      {name: "لوبیا پلو   ", desc: "  شنبه ", price: "155,000"},
-      {name: "عدس پلو ",desc: "  یک شنبه ",  price: "155,000"},
-      {name: "ماکارونی ",desc: "  دو شنبه", price: "155,000"},
-      {name: "هویج پلو ",desc: "   سه شنبه ", price: "155,000"},
-      {name: "استامبولی  ",desc: "   چهارشنبه ", price: "155,000"},
-      {name: "   کباب تابه ای با برنج ", price: "195,000"},
-      {name: "سالاد شیرازی   ", price: "35,000"},
-      {name: "    ماست و خیار ",desc:"پنج شنبه"   ,price: "35,000"},
-    ],
-    juice: [
-      {name: "  لیموناد",  price: "125,000"},
-      {name: "موهیتو ", price: "135,000"},
-      {name: "رد موهیتو ", price: "155,000"},
-      {name: "بلو موهیتو ", price: "155,000"},
-      {name: "آبجو کلاسیک ", price: "185,000"},
-      {name: "کوکتل الماس ",desc:"لیمو،توت فرنگی،نعناع" , price: "175,000"},
-      {name: "آب زرشک ", price: "115,000"},
-      {name: "آب آلبالو ", price: "115,000"},
-      {name: "آب میوه فصل", price: "130,000"},
-      {name: "ترش مخصوص الماس ", price: "175,000"},
-    ],
-    salad: [
-      {name: " سزار با فیله سوخاری", price: "335,000"},
-      {name: " سزار با فیله گریل", price: "315,000"},    
-    ],
-    khas: [
-      {name: "سینی مزه با فیله", price: "385,000"},
-      {name: "سینی کتف و بال", price: "315,000"},
+        <div class="menu-layout">
+            <div class="categories-sidebar" id="categoriesSidebar"></div>
+            <div class="items-container">
+                <div class="items-grid" id="itemsGrid"></div>
+            </div>
+        </div>
 
-    ],
-    iranianfood: [
-      {name: "کشک بادمجان", price: "240,000"},
-      {name: "میرزاقاسمی", price: "255,000"},
-      {name: "کباب تابه ای", price: "295,000"},
-    ],
-    motefareghe: [
-      {name: "نان سیر", price: "235,000"},
-      {name: "ذرت مکزیکی", price: "175,000"},
-    ],
-    snak: [
-      {name: "ژامبون", price: "145,000"},
-      {name: "فیله", price: "165,000"},
-      {name: "رست بیف", price: "185,000"},
-    ],
-    cake: [
-      {name: "کروسان نوتلا کوچک", price: "65,000"},
-      {name: "کروسان نوتلا بزرگ", price: "125,000"},
-      {name: "کیک روز", price: "95,000"},
-    ],
-    potato: [
-      {name: "ساده ", price: "185,000"},
-      {name: " مخصوص", price: "315,000"},
-      {name: " همراه با پنیر", price: "225,000"},
-      {name: "همراه با قارچ و پنیر", price: "265,000"},
-      {name: "همراه با سس بشامل", price: "285,000"},
-      {name: "همراه با هات داگ", price: "295,000"},
-      {name: "چیپس مخصوص", price: "285,000"},
-      {name: "چیپس و پنیر ویژه", price: "215,000"},
-    ],
-    pizza: [
-      {name: "رست بیف",desc:"تک نفره و دو نفره" ,price: "375,000/535,000"},
-      {name: "دیپ چیکن",desc:"تک نفره و دو نفره", price: "335,000/475,000"},
-      {name: "پپرونی",desc:"تک نفره و دو نفره", price: "315,000/455,000"},
-      {name: "مخصوص",desc:"تک نفره و دو نفره", price: "355,000/495,000"},
-      {name: " پاستا آلفردو ", price: "325,000"},
-      {name: "لازانیا مخصوص الماس", price: "345,000"},
-      {name: "پاستا بیف", price: "385,000"},
-    ],
-    ghelyan: [
-      {name: "دوسیب", price: "275,000"},
-      {name: "دوسیب آلبالو", price: "275,000"},
-      {name: "دوسیب شلیل", price: "275,000"},
-      {name: "دوسیب نعنا", price: "275,000"},
-      {name: "سیب یخ", price: "275,000"},
-      {name: "آلبالو", price: "275,000"},
-      {name: "آلو یخ", price: "275,000"},
-      {name: "پرتقال", price: "275,000"},
-      {name: "پرتقال نعناع", price: "275,000"},
-      {name: "پرتقال خامه", price: "275,000"},
-      {name: "لیمو نعناع", price: "275,000"},
-      {name: "لیمو", price: "275,000"},
-      {name: "نعناع", price: "275,000"},
-      {name: "هلو", price: "275,000"},
-      {name: "هلو نعناع", price: "275,000"},
-      {name: "هلو آلبالو", price: "275,000"},
-      {name: "هندوانه یخ", price: "275,000"},
-      {name: "آدامس دارچین", price: "275,000"},
-      {name: "بلوبری", price: "275,000"},
-      {name: "انبه", price: "275,000"},
-      {name: "لاو", price: "275,000"},
-      {name: "آدامس نعناع", price: "275,000"},
-      {name: "شبهای مسکو", price: "275,000"},
-      {name: "لیدی", desc: "ویژه", price: "345,000"},
-      {name: "جادوگر", desc: "ویژه", price: "345,000"},
-      {name: "بیسکویت", desc: "ویژه", price: "345,000"},
-      {name: "هاوایی", desc: "ویژه", price: "345,000"},
-      {name: "بلوگوآوا", desc: "ویژه", price: "345,000"},
-      {name: "شیر قهوه", desc: "ویژه", price: "345,000"},
-      {name: " سرویس اضافه",  price: "75,000"},
-      {name: "تعویض سری معمولی", price: "120,000"},
-      {name: "تعویض سری ویژه", price: "195,000"},
-    ],
-    breakfast: [
-      {name: "صبحانه ایرانی", price: "255,000"},
-      {name: "صبحانه انگلیسی", price: "285,000"},
-      {name: "املت", price: "125,000"},
-      {name: "  املت با گوجه", price: "125,000"},
-      {name: "املت و قارچ", price: "155,000"},
-      {name: "سوسیس تخم‌مرغ", price: "175,000"},
-      {name: "نیمرو", price: "195,000"},
-      {name: "نیمرو خرما", price: "155,000"},
-      {name: "عدسی", price: "135,000"},
-      {name: "خوراک لوبیا", price: "145,000"},
-    ]
-  };
+        <button class="back-btn" onclick="showHome()">
+            <i class="fas fa-arrow-right"></i> بازگشت
+        </button>
+    </div>
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const buttons = document.querySelectorAll(".category-tabs button");
-    const menuContainer = document.getElementById("menu-items");
+    <script>
+        // داده‌های کامل منو
+        const menuData = {
+            breakfast: [
+                {name: "صبحانه ایرانی", price: "195,000",  icon: "🧀🍅🍞🥒🍳"},
+                {name: "صبحانه انگلیسی", price: "235,000",  icon: "🍳🍲🥓"},
+                {name: "املت", price: "125,000",  icon: "🍅🍳"},
+                {name: "املت با گوجه", price: "145,000",  icon: "🍅🍳"},
+                {name: "املت و قارچ", price: "155,000",  icon: "🍄🍅🍳"},
+                {name: "املت سوسیس", price: "185,000",  icon: "🌭🍅🍳"},
+                {name: "املت مخصوص", price: "225,000",  icon: "🍄🥔🍅🍳"},
+                {name: "سوسیس تخم‌مرغ", price: "175,000",  icon: "🌭🍳"},
+                {name: "نیمرو", price: "95,000",  icon: "🍳"},
+                {name: "نیمرو خرما", price: "155,000",  icon: "🍳"},
+                {name: "عدسی", price: "135,000",  icon: "🥣"},
+                {name: "خوراک لوبیا", price: "145,000", icon: "🍲"}
+            ],
+            coffee: [
+                {name: "قهوه مخصوص", price: "165,000",  icon: "☕"},
+                {name: "قهوه ترک", price: "85,000",  icon: "☕"},
+                {name: "اسپرسو", price: "95,000",  icon: "☕"},
+                {name: "امریکانو", price: "115,000",  icon: "☕"},
+                {name: "آیس امریکانو", price: "125,000",  icon: "☕🧊"},
+                {name: "لته", price: "135,000",  icon: "☕"},
+                {name: "آیس لته", price: "145,000",  icon: "☕🧊"},
+                {name: "موکا", price: "135,000",  icon: "☕"},
+                {name: "آیس موکا", price: "145,000",  icon: "☕🧊"},
+                {name: "ماکیاتو", price: "135,000",  icon: "☕"},
+                {name: "آیس ماکیاتو", price: "145,000",  icon: "☕🧊"},
+                {name: "کاپوچینو", price: "135,000",  icon: "☕"},
+                {name: "نسکافه بلک", price: "115,000",  icon: "☕"},
+                {name: "هات چاکلت", price: "135,000",  icon: "🍫☕"},
+                {name: "وایت چاکلت", price: "125,000",  icon: "🍫☕"},
+                {name: "شیر قهوه", price: "145,000",  icon: "🥛☕"},
+                {name: "شیر نسکافه", price: "135,000",  icon: "🥛☕"},
+                {name: "شیر نوتلا", price: "155,000",  icon: "🥛☕"},
+                {name: "شیر عسل", price: "125,000",  icon: "🥛🍯"}
+            ],
+            tea: [
+                {name: "چای سبز", price: "105,000",  icon: "🍵"},
+                {name: "چای دمی", price: "75,000",  icon: "🍵"},
+                {name: "چای کرک زعفران", price: "125,000",  icon: "🍵"},
+                {name: "چای زعفران", price: "125,000",  icon: "🍵"},
+                {name: "چای ماسالا", price: "125,000",  icon: "🍵"},
+                {name: "چای دارچین", price: "115,000",  icon: "🍵"},
+                {name: "چای زنجبیل", price: "115,000",  icon: "🍵"},
+                {name: "چای ترش", price: "105,000",  icon: "🍵"},
+                {name: "دمنوش آرامش", price: "135,000",  icon: "🌿"},
+                {name: "دمنوش میکس", price: "145,000",  icon: "🌿"},
+                {name: "دمنوش سلامت", price: "125,000",  icon: "🌿"},
+                {name: "دمنوش گل گاوزبان", price: "155,000",  icon: "🌿"},
+                {name: "دمنوش آویشن", price: "115,000",  icon: "🌿"},
+                {name: "دمنوش بهار نارنج", price: "125,000",  icon: "🌿"},
+                {name: "دمنوش موهیتو", price: "125,000",  icon: "🌿"}
+            ],
+            pizza: [
+                {name: "رست بیف", price: "335,000/485,000", desc: "تک نفره و دو نفره", icon: "🍕"},
+                {name: "دیپ چیکن", price: "295,000/445,000", desc: "تک نفره و دو نفره", icon: "🍕"},
+                {name: "پپرونی", price: "275,000/425,000", desc: "تک نفره و دو نفره", icon: "🍕"},
+                {name: "مخصوص", price: "315,000/465,000", desc: "تک نفره و دو نفره", icon: "🍕"},
+                {name: "پاستا آلفردو", price: "325,000",  icon: "🍝"},
+                {name: "لازانیا مخصوص", price: "345,000",  icon: "🍝"},
+                {name: "پاستا بیف", price: "385,000",  icon: "🍝"}
+            ],
+            sandwich: [
+                {name: "برگر مخصوص الماس", price: "385,000",  icon: "🍔"},
+                {name: "برگر ساده", price: "225,000",  icon: "🍔"},
+                {name: "چیز برگر", price: "275,000",  icon: "🧀🍔"},
+                {name: "رویال برگر", price: "315,000",  icon: "🍔"},
+                {name: "هات داگ", price: "185,000",  icon: "🌭"},
+                {name: "هات داگ قارچ و پنیر", price: "235,000",  icon: "🧀🍄🌭"},
+                {name: "هات داگ رویال", price: "285,000",  icon: "🌭"},
+                {name: "ژامبون سرد", price: "195,000",  icon: "🥪"},
+                {name: "ژامبون تنوری", price: "275,000",  icon: "🥪"},
+                {name: "فلافل", price: "125,000", desc: "هم به صورت پرسی، هم ساندویچ", icon: "🌭"},
+                {name: "فلافل قارچ و پنیر", price: "175,000",  icon: "🧀🍄🌭"},
+                {name: "فیله", price: "235,000",  icon: "🥪"},
+                {name: "فیله با قارچ و پنیر", price: "285,000",  icon: "🧀🍄🥪"},
+                {name: "رست بیف", price: "315,000",  icon: "🥪"},
+                {name: "رست بیف با قارچ و پنیر", price: "375,000",  icon: "🧀🍄🥪"}
+            ],
+            salad: [
+                {name: "سزار با فیله سوخاری", price: "335,000",  icon: "🥗"},
+                {name: "سزار با فیله گریل", price: "315,000",  icon: "🥗"}
+            ],
+            khas: [
+                {name: "سینی مزه با فیله", price: "345,000",  icon: "🍱"},
+                {name: "سینی کتف و بال", price: "295,000",  icon: "🍗"}
+            ],
+            iranianfood: [
+                {name: "کشک بادمجان", price: "225,000",  icon: "🍛🍆"},
+                {name: "میرزاقاسمی", price: "255,000",  icon: "🍳🍆"},
+                {name: "کباب تابه ای", price: "285,000",  icon: "🍖"}
+            ],
+            motefareghe: [
+                {name: "نان سیر", price: "235,000",  icon: "🍞🧄"},
+                {name: "ذرت مکزیکی", price: "175,000",  icon: "🌽"}
+            ],
+            snak: [
+                {name: "ژامبون", price: "145,000",  icon: "🥓"},
+                {name: "فیله", price: "165,000",  icon: "🥩"},
+                {name: "رست بیف", price: "185,000",  icon: "🥩"}
+            ],
+            food: [
+                {name: "لوبیا پلو", price: "155,000", desc: "شنبه", icon: "🍚"},
+                {name: "عدس پلو", price: "155,000", desc: "یکشنبه", icon: "🍚"},
+                {name: "ماکارونی", price: "155,000", desc: "دوشنبه", icon: "🍝"},
+                {name: "هویج پلو", price: "155,000", desc: "سه‌شنبه", icon: "🍚"},
+                {name: "استامبولی", price: "155,000", desc: "چهارشنبه", icon: "🍚"},
+                {name: "جوجه چوبی با برنج", price: "195,000", desc: "پنجشنبه", icon: "🍚🍖"},
+                {name: "سالاد شیرازی", price: "35,000",  icon: "🍅🧅🥒"},
+                {name: "ماست و خیار", price: "35,000",  icon: "🥣"}
+            ],
+            cake: [
+                {name: "کروسان نوتلا کوچک", price: "65,000",  icon: "🥐"},
+                {name: "کروسان نوتلا بزرگ", price: "125,000",  icon: "🥐"},
+                {name: "کیک روز", price: "85,000",  icon: "🍰"}
+            ],
+            potato: [
+                {name: "ساده", price: "185,000",  icon: "🍟"},
+                {name: "مخصوص", price: "315,000",  icon: "🍟"},
+                {name: "همراه با پنیر", price: "225,000",  icon: "🧀🍟"},
+                {name: "همراه با قارچ و پنیر", price: "265,000",  icon: "🍟🍄🧀"},
+                {name: "همراه با سس بشامل", price: "285,000",  icon: "🍟🥣"},
+                {name: "همراه با هات داگ", price: "295,000",  icon: "🍟🌭"},
+                {name: "چیپس مخصوص", price: "285,000",  icon: "🥔"},
+                {name: "چیپس و پنیر", price: "215,000",  icon: "🧀🥔"}
+            ],
+            juice: [
+                {name: "لیموناد", price: "125,000",  icon: "🍹"},
+                {name: "موهیتو", price: "135,000",  icon: "🍹"},
+                {name: "رد موهیتو", price: "155,000",  icon: "🍹"},
+                {name: "بلو موهیتو", price: "155,000",  icon: "🍹"},
+                {name: "آبجو کلاسیک", price: "185,000",  icon: "🍺"},
+                {name: "کوکتل الماس", price: "175,000",  icon: "🍹"},
+                {name: "آب زرشک", price: "115,000",  icon: "🍹"},
+                {name: "آب آلبالو", price: "115,000",  icon: "🍹"},
+                {name: "آب میوه فصل", price: "125,000",  icon: "🍹"},
+                {name: "ترش مخصوص الماس", price: "175,000",  icon: "🍹"},
+                {name: "آب پرتقال", price: "125,000",  icon: "🍹"},
+                {name: "آب انار", price: "125,000",  icon: "🍹"},
+                {name: "میکس آب زرشک و آب آلبالو", price: "115,000",  icon: "🍹"}
+            ],
+            icecream: [
+                {name: "شیک شکلات", price: "175,000",  icon: "🍫🍦"},
+                {name: "شیک وانیل", price: "135,000",  icon: "🍦"},
+                {name: "شیک نوتلا", price: "195,000",  icon: "🍫🍦"},
+                {name: "شیک موز شکلات", price: "195,000",  icon: "🍫🍌🍦"},
+                {name: "شیک موز نوتلا", price: "215,000",  icon: "🍌🍫🍦"},
+                {name: "شیک قهوه", price: "185,000",  icon: "☕🍦"},
+                {name: "شیک نسکافه", price: "185,000",  icon: "☕🍦"},
+                {name: "شیک اسنیکرز", price: "185,000",  icon: "🍫🍦"},
+                {name: "شیک توت فرنگی", price: "165,000",  icon: "🍓🍦"},
+                {name: "شیک انبه", price: "185,000",  icon: "🥭🍦"},
+                {name: "کافه گلاسه", price: "195,000",  icon: "🍫🍌🍦"},
+                {name: "شکلات گلاسه", price: "175,000",  icon: "🍫🍦"},
+                {name: "سان شاین", price: "195,000",  icon: "🍫🍦"},
+                {name: "ژلاتو", price: "145,000",  icon: "🍦"},
+                {name: "کیک بستنی", price: "145,000",  icon: "🍰🍦"},
+                {name: "کپ بستنی", price: "125,000",  icon: "🍦"},
+                {name: "اسموتی انرژی زا", price: "235,000", desc: "شیر، موز، خرما، کنجد، بستنی", icon: "🥤"}
+            ],
+            ghelyan: [
+                {name: "دوسیب", price: "275,000",  icon: "🍎🍎"},
+                {name: "دوسیب آلبالو", price: "275,000",  icon: "🍒🍎🍎"},
+                {name: "دوسیب شلیل", price: "275,000",  icon: "🍑🍎🍎"},
+                {name: "دوسیب نعنا", price: "275,000",  icon: "🍎🍎🌿"},
+                {name: "سیب یخ", price: "275,000",  icon: "🧊🍎"},
+                {name: "آلبالو", price: "275,000",  icon: "🍒"},
+                {name: "آلو یخ", price: "275,000",  icon: "🧊🟣"},
+                {name: "پرتقال", price: "275,000",  icon: "🍊"},
+                {name: "پرتقال نعناع", price: "275,000",  icon: "🍊🌿"},
+                {name: "پرتقال خامه", price: "275,000",  icon: "🥛🍊"},
+                {name: "لیمو نعناع", price: "275,000",  icon: "🌿🍋"},
+                {name: "لیمو", price: "275,000",  icon: "🍋"},
+                {name: "نعناع", price: "275,000",  icon: "🌿"},
+                {name: "هلو", price: "275,000",  icon: "🍑"},
+                {name: "هلو نعناع", price: "275,000",  icon: "🍑🌿"},
+                {name: "هلو آلبالو", price: "275,000",  icon: "🍑🍒"},
+                {name: "تمشک بستنی", price: "275,000",  icon: "🍓🍦"},
+                {name: "هندوانه یخ", price: "275,000",  icon: "🧊🍉"},
+                {name: "آدامس دارچین", price: "275,000",  icon: "🍬"},
+                {name: "بلوبری", price: "275,000",  icon: "🍇"},
+                {name: "انبه", price: "275,000",  icon: "🥭"},
+                {name: "لاو", price: "275,000",  icon: "💕"},
+                {name: "آدامس نعناع", price: "275,000",  icon: "🍬"},
+                {name: "شبهای مسکو", price: "275,000",  icon: "🌃"},
+                {name: "لیدی", price: "335,000", desc: "ویژه", icon: "👑"},
+                {name: "جادوگر", price: "335,000", desc: "ویژه", icon: "🔮"},
+                {name: "بیسکویت", price: "335,000", desc: "ویژه", icon: "🍪"},
+                {name: "هاوایی", price: "335,000", desc: "ویژه", icon: "🏝️"},
+                {name: "بلوگوآوا", price: "335,000", desc: "ویژه", icon: "🟣"},
+                {name: "شیر قهوه", price: "335,000", desc: "ویژه", icon: "☕🥛"},
+                {name: "سرویس اضافه", price: "75,000",  icon: "➕"},
+                {name: "تعویض سری معمولی", price: "145,000",  icon: "🔄"},
+                {name: "تعویض سری ویژه", price: "195,000",  icon: "🔄"}
+            ]
+        };
 
-    function renderItems(category) {
-      menuContainer.innerHTML = "";
-      menuData[category].forEach(item => {
-        const card = document.createElement("div");
-        card.className = "menu-card";
-        let descHTML = "";
-        if (item.desc) {
-          descHTML = `<p>${item.desc}</p>`;
+        const categoryIcons = {
+            breakfast: `<img src="images/break22.jpg" alt="break22 icon" style="width:40px; height:auto;">`,
+            coffee:  `<img src="images/coffee22.jpg" alt="coffee icon" style="width:40px; height:auto;">`,
+            pizza: `<img src="images/pizaa22.jpg" alt="pizza icon" style="width:40px; height:auto;">`,
+            sandwich: `<img src="images/burger22.jpg" alt="burger icon" style="width:40px; height:auto;">`,
+            food: `<img src="images/food22.jpg" alt="food icon" style="width:40px; height:auto;">`,
+            iranianfood: `<img src="images/iranian22.jpg" alt="iranian icon" style="width:40px; height:auto;">`,
+            salad: `<img src="images/salad22.jpg" alt="slad icon" style="width:40px; height:auto;">`,
+            potato: `<img src="images/potato22.jpg" alt="potato icon" style="width:40px; height:auto;">`,
+            snak: `<img src="images/snack22.jpg" alt="snack icon" style="width:40px; height:auto;">`,
+            khas: `<img src="images/bal22.jpg" alt="bal icon" style="width:40px; height:auto;">`,
+            motefareghe: `<img src="images/motefareghe22.jpg" alt="motefareghe icon" style="width:40px; height:auto;">`,
+            tea: `<img src="images/tea22.jpg" alt="tea icon" style="width:40px; height:auto;">`,
+            cake: `<img src="images/cake22.jpg" alt="cake icon" style="width:40px; height:auto;">`,
+            icecream: `<img src="images/shake22.jpg" alt="shake icon" style="width:40px; height:auto;">`,
+            juice: `<img src="images/juice22.jpg" alt="juice icon" style="width:40px; height:auto;">`,
+            ghelyan: `<img src="images/hooka22.png" alt="hooka icon" style="width:40px; height:auto;">`,
+        };
+
+        const categoryNames = {
+            breakfast: "صبحانه",
+            pizza: "پیتزا و پاستا",
+            sandwich: "ساندویچ و برگر",
+            food: "غذای روز",
+            iranianfood: "غذای ایرانی",
+            khas: "یه چیز خاص",
+            salad: "سالاد",
+            snak: "اسنک",
+            potato: "سیب زمینی و چیپس ",
+            coffee: "بر پایه قهوه",
+            tea: "چای و دمنوش",
+            cake: "کیک و کروسان",
+            juice: "آبمیوه و نوشیدنی خنک",
+            icecream: "بستنی و شیک",
+            motefareghe: "متفرقه",
+            ghelyan: "قلیان",
+        };
+
+        let currentCategory = null;
+        let filteredItems = [];
+
+        // توابع مدال
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
         }
-        card.innerHTML = `
-          <h3>${item.name}</h3>
-          ${descHTML}
-          <div class="price">${item.price} تومان</div>
-        `;
-        menuContainer.appendChild(card);
-      });
-      menuContainer.className = "menu-items"; // پایه
-      switch (category) {
-        case "coffee":
-          menuContainer.classList.add("coffee-bg");
-          break;
-        case "tea":
-          menuContainer.classList.add("tea-bg");
-          break;
-        case "icecream":
-          menuContainer.classList.add("icecream-bg");
-          break;
-        case "sandwich":
-          menuContainer.classList.add("sandwich-bg");
-          break;
-        case "pizza":
-          menuContainer.classList.add("pizaa-bg");
-          break;
-        case "ghelyan":
-          menuContainer.classList.add("ghelyan-bg");
-          break;
-        case "breakfast":
-          menuContainer.classList.add("breakfast-bg");
-          break;
-        case "juice":
-        case "salad":
-        case "khas":
-        case "iranianfood":
-        case "motefareghe":
-        case "snak":
-        case "cake":
-        case "potato":
-        case "food":
-          // برای دسته‌بندی‌هایی که عکس خاصی ندارند، از عکس پیش‌فرض استفاده می‌کنیم
-          menuContainer.classList.add("coffee-bg");
-          break;
-      }
-    }
 
-    buttons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        renderItems(btn.dataset.category);
-      });
-    });
-  });
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
 
-  function showMenu() {
-    document.getElementById('home-page').style.display = 'none';
-    document.getElementById('menu-page').style.display = 'block';
-    document.getElementById('info-page').style.display = 'none';
-  }
-  function showInfo() {
-    document.getElementById('home-page').style.display = 'none';
-    document.getElementById('menu-page').style.display = 'none';
-    document.getElementById('info-page').style.display = 'block';
-  }
-  function showHome() {
-    document.getElementById('home-page').style.display = 'block';
-    document.getElementById('menu-page').style.display = 'none';
-    document.getElementById('info-page').style.display = 'none';
-  }
-</script>
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
 
+        // توابع صفحه‌بندی
+        function showMenu() {
+            document.getElementById('home-page').style.display = 'none';
+            document.getElementById('menu-page').style.display = 'block';
+            renderCategories();
+            document.getElementById('itemsGrid').innerHTML = '<div class="welcome-message" style="text-align: center; padding: 50px; opacity: 0.7;">لطفاً یک دسته‌بندی را انتخاب کنید</div>';
+        }
+
+        function showHome() {
+            document.getElementById('home-page').style.display = 'flex';
+            document.getElementById('menu-page').style.display = 'none';
+            document.getElementById('searchInput').value = '';
+            currentCategory = null;
+        }
+
+        function renderCategories() {
+            const sidebar = document.getElementById('categoriesSidebar');
+            sidebar.innerHTML = '';
+
+            Object.keys(categoryNames).forEach(category => {
+                const categoryItem = document.createElement('div');
+                categoryItem.className = `category-item ${category === currentCategory ? 'active' : ''}`;
+                categoryItem.onclick = () => switchCategory(category);
+                
+                categoryItem.innerHTML = `
+                    <div class="category-icon">${categoryIcons[category]}</div>
+                    <div class="category-name">${categoryNames[category]}</div>
+                `;
+                
+                sidebar.appendChild(categoryItem);
+            });
+        }
+
+        function switchCategory(category) {
+            currentCategory = category;
+            renderCategories();
+            renderItems(category);
+        }
+
+        function renderItems(category) {
+            const itemsGrid = document.getElementById('itemsGrid');
+            itemsGrid.innerHTML = '';
+
+            const items = menuData[category] || [];
+            filteredItems = [...items];
+
+            items.forEach(item => {
+                const itemCard = document.createElement('div');
+                itemCard.className = 'menu-item-card fade-in-up';
+                
+                const description = item.desc && item.desc.trim() !== '' ? `<p class="item-description">${item.desc}</p>` : '';
+                const itemIcon = item.icon || '🍽️';
+                
+                itemCard.innerHTML = `
+                    <div class="item-image-placeholder">
+                        <div class="item-icon">${itemIcon}</div>
+                    </div>
+                    <h3 class="item-name">${item.name}</h3>
+                    ${description}
+                    <div class="item-price">${item.price} تومان</div>
+                `;
+                
+                itemsGrid.appendChild(itemCard);
+            });
+        }
+
+        // جستجو
+        function normalizeText(text) {
+            return text
+                .replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
+                .toLowerCase()
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = normalizeText(e.target.value);
+            const itemsGrid = document.getElementById('itemsGrid');
+            
+            if (searchTerm === '') {
+                if (currentCategory) {
+                    renderItems(currentCategory);
+                } else {
+                    itemsGrid.innerHTML = '<div class="welcome-message" style="text-align: center; padding: 50px; opacity: 0.7;">لطفاً یک دسته‌بندی را انتخاب کنید</div>';
+                }
+                return;
+            }
+            
+            itemsGrid.innerHTML = '';
+            
+            let allItems = [];
+            Object.keys(menuData).forEach(category => {
+                menuData[category].forEach(item => {
+                    allItems.push({...item, category: category});
+                });
+            });
+            
+            const searchedItems = allItems.filter(item => 
+                normalizeText(item.name).includes(searchTerm) ||
+                (item.desc && normalizeText(item.desc).includes(searchTerm)) ||
+                normalizeText(categoryNames[item.category]).includes(searchTerm)
+            );
+
+            if (searchedItems.length === 0) {
+                itemsGrid.innerHTML = '<div class="no-results" style="text-align: center; padding: 50px; opacity: 0.7;">نتیجه‌ای یافت نشد</div>';
+                return;
+            }
+
+            searchedItems.forEach(item => {
+                const itemCard = document.createElement('div');
+                itemCard.className = 'menu-item-card fade-in-up';
+                
+                const description = item.desc && item.desc.trim() !== '' ? `<p class="item-description">${item.desc}</p>` : '';
+                const itemIcon = item.icon || '🍽️';
+                
+                itemCard.innerHTML = `
+                    <div class="item-image-placeholder">
+                        <div class="item-icon">${itemIcon}</div>
+                    </div>
+                    <h3 class="item-name">${item.name}</h3>
+                    <p class="item-category" style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 8px;">${categoryNames[item.category]}</p>
+                    ${description}
+                    <div class="item-price">${item.price} تومان</div>
+                `;
+                
+                itemsGrid.appendChild(itemCard);
+            });
+        });
+
+        // مقداردهی اولیه
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCategories();
+        });
+    </script>
 </body>
 </html>
