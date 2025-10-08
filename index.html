@@ -145,22 +145,24 @@
         .home-items {
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            width: 100%;
-            max-width: 420px;
+            gap: 15px;
+            width: 95%;
+            max-width: 380px;
+            margin-top: 40px; /* پایین‌تر */
         }
 
         .home-item-card {
             background: rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(25px);
-            border-radius: 20px;
-            padding: 20px;
+            border-radius: 18px;
+            padding: 16px;
             transition: all 0.4s ease;
             border: 1px solid rgba(255, 255, 255, 0.2);
             text-align: right;
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            transform: scale(0.95); /* کمی کوچک‌تر */
         }
 
         .home-item-card::before {
@@ -714,7 +716,8 @@
     <div id="home-page">
         <div class="logo-simple">💎</div>
         <h1 class="cafe-title">کافه الماس</h1>
-        <p class="cafe-subtitle">زمانی هرچند کوتاه برای رسیدن به حال خوب</p>
+        <p class="cafe-subtitle">زمانی هرچند کوتاه </p>
+        <span style="display: block; margin-top: 5px;">برای رسیدن به حال خوب</span>
         
         <button class="enter-btn" onclick="showMenu()">ورود به منو</button>
 
@@ -1237,6 +1240,7 @@
 </body>
  <!-- test -->
 </html>
+
 
 
 
