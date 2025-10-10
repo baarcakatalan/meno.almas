@@ -1144,6 +1144,11 @@
             currentCategory = category;
             renderCategories();
             renderItems(category);
+            // اسکرول کانتینر آیتم‌ها رو به بالا برگردون
+            const itemsContainer = document.querySelector('.items-container');
+            if (itemsContainer) {
+                itemsContainer.scrollTop = 0;
+            }
         }
 
         function renderItems(category) {
@@ -1244,6 +1249,7 @@
 </body>
  <!-- test -->
 </html>
+
 
 
 
